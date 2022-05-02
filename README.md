@@ -6,9 +6,7 @@
 ## FortiGate Active/Passive LB Sandwich with Azure External LB and Internal LB
 _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-ELB-ILB_
 
-* Create Load Balancing Rules as explained in the link below
-
-https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md
+* Create Load Balancing Rules as explained in this [link] (https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md)
 
 * DO NOT enabled **Floating IP** on the LB rules, since the FortiGate does not listen on the public ip for incoming VPN communications.
 
