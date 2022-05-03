@@ -5,18 +5,24 @@
 * List some troubleshooting options
 
 
-## FortiGate Active/Passive LB Sandwich with Azure External LB and Internal LB
+## FortiGate Active/Passive with Azure ELB and ILB
 _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-ELB-ILB_
 
 ![ipsec](images/ap-elb-ilb.png)
 
-* To enable IPSEC, you need to create Load Balancing Rules for UDP 500 and UDP 4500 as explained in this [link](https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md)
+* To enable IPSEC, you need to create Load Balancing Rules for UDP 500 and UDP 4500 as explained in this [link](https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md#configuration---ipsec)
 
-* DO NOT enabled **Floating IP** on the LB rules, since the FortiGate does not listen on the public ip for incoming VPN communications.
+* When **Floating IP** is enabled, Azure LB Azure changes the IP address mapping to the Frontend IP address of the Load Balancer  instead of backend instance's IP, as explained [here](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-floating-ip)
 
-    ![floating](images/floating-disabled.png)
+    ![floating](images/floating.png)
+
+Do NOT enabled **Floating IP** on the LB rules, since the FortiGates are not aware and are not configured to listen on the public ip for incoming VPN connections.
+
+![floating](images/floating-disabled.png)
 
 * Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
+
+    ![natt](images/natt.png)
 
 * If the tunnel is failing with the error message **received notify type AUTHENTICATION_FAILED** it is likely that the local-id set by the FortiGate does not match the local id expected by the peer.  To resolve this issue you can configure the FortiGate to set a specific localid-type and value to match the value exptected by the peer.
     The example below shows local-id type set to address and the value set to the public ip.
@@ -24,7 +30,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
     ![localid](images/localid.png)
 
-## FortiGate Active/Active LB Sandwich with Azure External LB and Internal LB
+## FortiGate Active/Active with Azure ELB and ILB
 _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-ELB-ILB_
 
 ![ipsec](images/aa-elb-ilb.png)
