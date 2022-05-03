@@ -1,7 +1,7 @@
 # IPSEC VPN with FGT in Azure - FAQ
 
 ## Main objectives of this document
-* Explain how to configure Azure components to establish a VPN between the FortiGates in Azure and an on-prem device
+* Explain how to configure Azure components to establish a ipsec vpn tunnel between the FortiGates in Azure and an on-prem device
 * List some troubleshooting options
 
 
@@ -16,9 +16,10 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
     ![floating](images/floating.png)
 
-Do NOT enabled **Floating IP** on the LB rules, since the FortiGates are not aware and are not configured to listen on the public ip for incoming VPN connections.
+Do NOT enabled **Floating IP** on the IPSEC VPN LB rules (UDP 500 and UDP 4500), since the FortiGates are not aware and are not configured to listen on the public ip for incoming VPN connections.
 
-![floating](images/floating-disabled.png)
+![floating](images/floating-disabled-udp500.png)
+![floating](images/floating-disabled-udp4500.png)
 
 * Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
 
