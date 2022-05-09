@@ -73,10 +73,28 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
       ![lbinsights](images/LB-Insights-ap.png)
 
-  2. Check on the FortiGate if udp 500 and udp 4500 are reaching the FortiGate from the on-premise device. Use the command `diagnose sniffer packet any 'port 500 or port 4500' 4 0 a `
+  2. Check on the FortiGate if udp 500 and udp 4500 are reaching the FortiGate from the on-premise device. Use the command ```diagnose sniffer packet any 'port 500 or port 4500' 4 0 a ```  or the following command if you want to only capture traffic coming from your peer. Replace x.x.x.x with the actual peer ip ```diagnose sniffer packet any '(port 500 or port 4500) and host x.x.x.x' 4 0 a ```
 
       ![tcpdump](images/ipsec-tcpdump.png)
 
+  3. If the tcpdump does not show any packet. Please check your NSG rules
 
+  4. > to do . Add NSG flow logs
 
 ### <ins>FortiGate</ins>
+* To check log relating to vpn events on the FortiGate go to Log & Report, Events and then clickk on VPN events
+      ![vpnevents](images/vpnevents.png)
+
+* Click on the error message to view further details
+      ![vpnevents2](images/vpnevents2.png)
+
+* For further advanced troubleshooting, use the commands below
+
+```
+diagnose vpn ike filter name <phase1 name>
+diagnose debug application ike -1
+diagnose debug enabled
+
+```
+
+* for further details, please check this [kb article](https://community.fortinet.com/t5/FortiGate/Technical-Tip-Troubleshooting-IPsec-VPNs/ta-p/195955) and [this one](https://community.fortinet.com/t5/FortiGate/Troubleshooting-Tip-IPSEC-Tunnel-debugging-IKE/ta-p/190052)
