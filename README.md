@@ -54,9 +54,9 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
 ### <ins>FortiGate</ins>
 
-* Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer. See screenshot in the previous section
+* Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer. See screenshot in the previous [section](https://github.com/mremini/fgt-in-azure-ipsec-troubleshoot#fortigate)
 
-* If needed, configure the localid parameter on the FortiGates and on the remote peer. See screenshot in the previous section
+* If needed, configure the localid parameter on the FortiGates and on the remote peer. See screenshot in the previous [section](https://github.com/mremini/fgt-in-azure-ipsec-troubleshoot#fortigate)
 
 
 
