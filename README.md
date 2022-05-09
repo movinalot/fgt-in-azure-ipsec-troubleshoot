@@ -89,7 +89,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 * Click on the error message to view further details
       ![vpnevents2](images/vpnevents2.png)
 
-* For further advanced troubleshooting, use the commands below
+* For advanced troubleshooting, use the commands below
 
 ```
 diagnose vpn ike filter name <phase1 name>
