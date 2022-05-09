@@ -10,26 +10,32 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
 ![ipsec](images/ap-elb-ilb.png)
 
+### Azure
+
 * To enable IPSEC, you need to create Load Balancing Rules for UDP 500 and UDP 4500 as explained in this [link](https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md#configuration---ipsec)
 
-* When **Floating IP** is enabled, Azure LB Azure changes the IP address mapping to the Frontend IP address of the Load Balancer  instead of backend instance's IP, as explained [here](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-floating-ip)
+* Do NOT enabled **Floating IP** on the IPSEC VPN LB rules (UDP 500 and UDP 4500). When **Floating IP** is enabled, Azure LB Azure changes the IP address mapping to the Frontend IP address of the Load Balancer  instead of backend instance's IP, as explained [here](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-floating-ip).
 
     ![floating](images/floating.png)
 
-Do NOT enabled **Floating IP** on the IPSEC VPN LB rules (UDP 500 and UDP 4500), since the FortiGates are not aware and are not configured to listen on the public ip for incoming VPN connections.
+    > since the FortiGates are not aware and are not configured to listen on the public ip for incoming VPN connections, **Floating IP** should not be enabled.
 
 ![floating](images/floating-disabled-udp500.png)
 ![floating](images/floating-disabled-udp4500.png)
+
+### FortiGate
 
 * Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
 
     ![natt](images/natt.png)
 
-* If the tunnel is failing with the error message **received notify type AUTHENTICATION_FAILED** it is likely that the local-id set by the FortiGate does not match the local id expected by the peer.  To resolve this issue you can configure the FortiGate to set a specific localid-type and value to match the value exptected by the peer.
-    The example below shows local-id type set to address and the value set to the public ip.
+* If the tunnel is failing with the error message **received notify type AUTHENTICATION_FAILED** it is likely that the local-id set by the FortiGate does not match the local id expected by the peer.  To resolve this issue you can configure the FortiGate to set a specific localid-type and value. Please ensure that the vpn peer is configured to match this value in the peer-id field
+    The example below shows local-id type and value set to fqdn.
     The localid-type and value can be set to fqdn, a string or auto, for more information please consult the CLI guide [here](https://docs.fortinet.com/document/fortigate/7.2.0/cli-reference/370620/config-vpn-ipsec-phase1-interface)
 
-    ![localid](images/localid.png)
+    ![localid](images/localidfqdn.png)
+
+    > Note: do not set the localid value to the private ip address of the FortiGate nic, since upon failover the ip address of the new primay FortiGate will be diffrent
 
 ## FortiGate Active/Active with Azure ELB and ILB
 _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-ELB-ILB_
@@ -41,9 +47,13 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
     ![a-a](images/ipsec-a-a.png)
 
+* To ensure that
 
+* Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
 
 ## FortiGate Active/Passive LB Sandwich with Azure Internal LB only
+
+## FortiGate Active/Active LB Sandwich with Azure Internal LB only
 
 
 ## Troubleshooting
