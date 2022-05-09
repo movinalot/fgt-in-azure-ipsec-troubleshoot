@@ -50,7 +50,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
 * To ensure that both FortiGate in Azure are be able to initiate the tunnel negotiation, ensure that Azure external has outbound NAT rules for both FortiGate on UDP traffic.  **Ensure that the same public ip address is used for outgoing traffic for each FortiGate**
 
-    ![a-a](images/natt-aa-outbound.png)
+    ![a-a-outbound](images/natt-aa-outbound.png)
 
 ### <ins>FortiGate</ins>
 
@@ -68,6 +68,15 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 ## Troubleshooting
 
 ### <ins>Azure</ins>
+* For FortiGate A/P LB sandwich, ensure that UDP500 and UDP4500 Load balancing rules are functionnal
+  1. In Azure, go to the Azure external load balancer, click on Insights and verify that the primary FortiGate is marked as healthy (answering health probes). The other FortiGate is secondary so should be marked as unhealthy
+
+      ![lbinsights](images/LB-Insights-ap.png)
+
+  2. Check on the FortiGate if udp 500 and udp 4500 are reaching the FortiGate from the on-premise device. Use the command `diagnose sniffer packet any 'port 500 or port 4500' 4 0 a `
+
+      ![tcpdump](images/ipsec-tcpdump.png)
+
 
 
 ### <ins>FortiGate</ins>
