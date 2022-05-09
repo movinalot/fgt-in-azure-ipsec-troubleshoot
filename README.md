@@ -77,7 +77,8 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
       ![tcpdump](images/ipsec-tcpdump.png)
 
-  3. If the tcpdump does not show any packet. Please check your NSG rules
+  3. If the tcpdump does not show any packet. Please check your NSG rules.
+        ![nsg](images/nsg.png)
 
   4. > to do . Add NSG flow logs
 
@@ -94,7 +95,6 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 diagnose vpn ike filter name <phase1 name>
 diagnose debug application ike -1
 diagnose debug enabled
-
 ```
 
-* for further details, please check this [kb article](https://community.fortinet.com/t5/FortiGate/Technical-Tip-Troubleshooting-IPsec-VPNs/ta-p/195955) and [this one](https://community.fortinet.com/t5/FortiGate/Troubleshooting-Tip-IPSEC-Tunnel-debugging-IKE/ta-p/190052)
+* For further IPSEC vpn troubleshooting tips, please check this [kb article](https://community.fortinet.com/t5/FortiGate/Technical-Tip-Troubleshooting-IPsec-VPNs/ta-p/195955) and [this one](https://community.fortinet.com/t5/FortiGate/Troubleshooting-Tip-IPSEC-Tunnel-debugging-IKE/ta-p/190052)
