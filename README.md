@@ -23,7 +23,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 ![floating](images/floating-disabled-udp500.png)
 ![floating](images/floating-disabled-udp4500.png)
 
-### FortiGate
+### <ins>FortiGate</ins>
 
 * Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
 
@@ -35,21 +35,30 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
     ![localid](images/localidfqdn.png)
 
-    > Note: do not set the localid value to the private ip address of the FortiGate nic, since upon failover the ip address of the new primay FortiGate will be diffrent
+    > Do not set the localid value to the private ip address of the FortiGate nic, since upon failover the ip address of the new primay FortiGate will be a diffrent one.
 
 ## FortiGate Active/Active with Azure ELB and ILB
 _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-ELB-ILB_
 
 ![ipsec](images/aa-elb-ilb.png)
 
+### <ins>Azure</ins>
 
 * The setup of Active/Active FortiGates in Azure (link above) requires that each FortiGate is accessible separately to your remote peer to establish an IPSEC VPN tunnel. To expose each FortiGate separately through Azure Public Load Balancer, please create **2 Inbound NAT rules per FGT**  as shown in the screenshot below. **Each FortiGate must have its own frontend ip address so you should have at least 2 public ip attached to the Load Balancer**
 
     ![a-a](images/ipsec-a-a.png)
 
-* To ensure that
+* To ensure that both FortiGate in Azure are be able to initiate the tunnel negotiation, ensure that Azure external has outbound NAT rules for both FortiGate on UDP traffic.  **Ensure that the same public ip address is used for outgoing traffic for each FortiGate**
 
-* Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer
+    ![a-a](images/natt-aa-outbound.png)
+
+### <ins>FortiGate</ins>
+
+* Make sure that NAT Traversal is set to **Enable** or  **Forced** on both the FortiGate in Azure and on the remote peer. See screenshot in the previous section
+
+* If needed, configure the localid parameter on the FortiGates and on the remote peer. See screenshot in the previous section
+
+
 
 ## FortiGate Active/Passive LB Sandwich with Azure Internal LB only
 
