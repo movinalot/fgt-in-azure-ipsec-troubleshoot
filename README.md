@@ -10,7 +10,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
 ![ipsec](images/ap-elb-ilb.png)
 
-### <u>Azure</u>
+### <ins>Azure</ins>
 
 * To enable IPSEC, you need to create Load Balancing Rules for UDP 500 and UDP 4500 as explained in this [link](https://github.com/fortinet/azure-templates/blob/main/FortiGate/Active-Passive-ELB-ILB/doc/config-inbound-connections.md#configuration---ipsec)
 
