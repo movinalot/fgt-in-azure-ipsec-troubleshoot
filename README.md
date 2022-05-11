@@ -50,7 +50,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
     ![a-a](images/ipsec-a-a.png)
 
-* To ensure that both FortiGate in Azure are be able to initiate the tunnel negotiation, ensure that Azure external has outbound NAT rules for both FortiGate on UDP traffic.  **Ensure that the same public ip address is used for outgoing traffic for each FortiGate**
+* To ensure that both FortiGate in Azure are be able to initiate the tunnel negotiation, ensure that Azure external LB has outbound NAT rules for both FortiGate on UDP traffic.  **Ensure that the same public ip address is used for outgoing traffic for each FortiGate**
 
     ![a-a-outbound](images/natt-aa-outbound.png)
 
