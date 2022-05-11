@@ -65,6 +65,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 * Ensure that **SNAT** is enabled on the FortiGate VPN policies to ensure traffic symmetry.
 
 ## FortiGate Active/Passive LB Sandwich with Azure Internal LB only
+_https://github.com/movinalot/fortinet-azure-solutions/tree/main/FortiGate/AvailabilityZones/Active-Passive-ILB-ILB-AZ_
 
 * The most common scenario for setting up an ipsec VPN tunnel with an "internal" firewall is to estabish an ipsec vpn tunnel over express route to ensure end to end ecnrypted connectity and a secure path for data.
 
@@ -76,7 +77,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
     > Azure ILB by design does not SNAT traffic. If using Azure Internal LB for ipsec vpn, when the FortiGate in Azure tries to initiate the tunnel to the on-premise device it won't be snatted by the Azure internal LB, hence your on-premise device will see the FortiGate IP address coming to establish the ipsec VPN instead of the Azure ILB frontend ip address, causing the tunnel to fail.
 
-* If you want ILB frontendip address on your on-premise device to terminate the ipsec vpn, FortiGate  ipsec vpn should be set to **passive** mode in order to not initiate the tunnel establishement.
+* If you want your on-premise device to terminate the ipsec vpn on the ILB frontendip address then the FortiGate  ipsec vpn should be set to **passive** mode in order to not initiate the tunnel establishement.
 
     ![passive-mode.png](images/passive-mode.png)
 
