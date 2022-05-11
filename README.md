@@ -31,7 +31,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Passive-
 
     ![natt](images/natt.png)
 
-* If the tunnel is failing with the error message **received notify type AUTHENTICATION_FAILED** or **RETRANSMIT_AUTH** it is likely that the local-id set by the FortiGate does not match the local id expected by the peer.  To resolve this issue you can configure the FortiGate to set a specific localid-type and value. Please ensure that the vpn peer is configured to match this value in the peer-id field
+* If the tunnel is failing with the error message "**received notify type AUTHENTICATION_FAILED**" or "**RETRANSMIT_AUTH**" it is likely that the local-id set by the FortiGate does not match the local id expected by the peer.  To resolve this issue you can configure the FortiGate to set a specific localid-type and value. Please ensure that the vpn peer is configured to match this value in the peer-id field.
     The example below shows local-id type and value set to fqdn.
     The localid-type and value can be set to fqdn, a string or auto, for more information please consult the CLI guide [here](https://docs.fortinet.com/document/fortigate/7.2.0/cli-reference/370620/config-vpn-ipsec-phase1-interface)
 
