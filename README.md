@@ -1,8 +1,8 @@
 # IPSEC VPN with FGT in Azure - FAQ
 
 ## Main objectives of this document
-* Explain how to configure Azure components to establish a ipsec vpn tunnel between the FortiGates in Azure and an on-prem device
-* List some troubleshooting options
+* Explain how to configure Azure components to establish a ipsec vpn tunnel between the FortiGates in Azure and an on-premise device
+* List some troubleshooting options.
 
 
 ## FortiGate Active/Passive with Azure ELB and ILB
@@ -60,12 +60,13 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
 * If needed, configure the localid parameter on the FortiGates and on the remote peer. See screenshot in the previous [section](https://github.com/mremini/fgt-in-azure-ipsec-troubleshoot#fortigate)
 
-* Ensure that SNAT is enabled on the FortiGate VPN policies to ensure traffic symmetry.
+* Make sure you have a policy configured referencing the VPN.
 
+* Ensure that **SNAT** is enabled on the FortiGate VPN policies to ensure traffic symmetry.
 
 ## FortiGate Active/Passive LB Sandwich with Azure Internal LB only
 
-* The most common scenario for setting up an ipsec VPN tunnel between an "internal" firewall and on-premise is to estabish an ipsec vpn tunnel over express route, to ensure end to end ecnrypted connectity and secure path for data.
+* The most common scenario for setting up an ipsec VPN tunnel with an "internal" firewall is to estabish an ipsec vpn tunnel over express route to ensure end to end ecnrypted connectity and a secure path for data.
 
 * Unlike the A/P ELB and ILB deployment where the public load balancer is used to load balance IPSEC VPN traffic  to the primary FortiGate, in this scenario the Internal LB cannot be used to load balance IPSEC VPN if you want the FortiGate to be able to initiate IPSEC VPN tunnel negotiation.
 
@@ -73,7 +74,7 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
     ![ap-ilbilb](images/ap-ilb-ilb.png)
 
-    > Explanation: Azure ILB by design does not SNAT traffic. If using Azure Internal LB for ipsec vpn, if the FortiGate in Azure tries to initiate the tunnel to the on-premise device it won't be snatted by the Azure internal LB, hence your on-premise device will see the FortiGate IP address coming to establish the ipsec VPN instead of the Azure ILB frontend ip address, causing the tunnel to fail.
+    > Azure ILB by design does not SNAT traffic. If using Azure Internal LB for ipsec vpn, when the FortiGate in Azure tries to initiate the tunnel to the on-premise device it won't be snatted by the Azure internal LB, hence your on-premise device will see the FortiGate IP address coming to establish the ipsec VPN instead of the Azure ILB frontend ip address, causing the tunnel to fail.
 
 * If you want ILB frontendip address on your on-premise device to terminate the ipsec vpn, FortiGate  ipsec vpn should be set to **passive** mode in order to not initiate the tunnel establishement.
 
@@ -97,8 +98,6 @@ _https://github.com/fortinet/azure-templates/tree/main/FortiGate/Active-Active-E
 
   3. If the tcpdump does not show any packet. Please check your NSG rules.
         ![nsg](images/nsg.png)
-
-  4. > to do . Add NSG flow logs
 
 ### <ins>FortiGate</ins>
 * To check log relating to vpn events on the FortiGate go to Log & Report, Events and then clickk on VPN events
